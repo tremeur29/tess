@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+  <title>tess</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+body {
+  background-color: #ffffff;
+  color: #999999;
+  font-family: 'courier new', monospace;
+  font-size: 9pt;
+  text-transform: lowercase;
+}
+
+i, b, a, code {
+  color: #555555;
+}
+
+
+
+a:hover {
+  color: #999999;
+}
+
+code {
+  font-family: 'courier new', monospace;
+  background-color: #eeeeee;
+}
+  
+.masonry-wrapper {
+  padding: 1.5em;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(100px,1fr));
+  grid-gap: 10px;
+  grid-auto-rows: 0;
+}
+.masonry-item img {
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+  padding: 0 0 5px 0;
+}
+.masonry-item p {
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 0 0 5px 0;
+}
+@media only screen and (max-width: 730px) and (min-width: 500px) {
+  .masonry {
+    grid-template-columns: repeat(2, minmax(100px,1fr));
+  }
+}
+@media only screen and (max-width: 1023px) and (min-width: 731px) {
+  .masonry {
+    grid-template-columns: repeat(3, minmax(100px,1fr));
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .masonry {
+    grid-template-columns: repeat(4, minmax(100px,1fr));
+  }
+}
+
+/** LIGHTBOX MARKUP **/
+
+.lightbox {
+	/** Default lightbox to hidden */
+	display: none;
+
+	/** Position and style */
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+.lightbox > img {
+	/** Pad the lightbox image */
+	max-width: 90%;
+	max-height: 90%;
+   display: block;
+   margin: auto;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lightbox:target {
+	/** Remove default browser outline */
+	outline: none;
+
+	/** Unhide lightbox **/
+	display: block;
+}
+
+#paginato {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px 20px 5px 10px;
+    background-color: white;
+}
+
+.source {
+    text-align: right;
+    font-style: italic;
+}
+
+  </style>
+</head>
+<body>
+
+{{ content }}
+
+{% if paginator.total_pages > 1 %}
+<div id="paginato">
+<p>{% if paginator.previous_page %}<a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">< {{ paginator.previous_page }}</a> {% endif %}{{ paginator.page }}{% if paginator.next_page %} <a href="{{ site.baseurl }}{{ paginator.next_page_path }}">{{ paginator.next_page }} ></a>{% endif %}</p>
+</div>
+{% endif %}
+
+<script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script>
+/**
+ * Set appropriate spanning to any masonry item
+ *
+ * Get different properties we already set for the masonry, calculate 
+ * height or spanning for any cell of the masonry grid based on its 
+ * content-wrapper's height, the (row) gap of the grid, and the size 
+ * of the implicit row tracks.
+ *
+ * @param item Object A brick/tile/cell inside the masonry
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function resizeMasonryItem(item){
+  /* Get the grid object, its row-gap, and the size of its implicit rows */
+  var grid = document.getElementsByClassName('masonry')[0];
+  if( grid ) {
+    var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
+        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows')),
+        gridImagesAsContent = item.querySelector('img.masonry-content');
+
+    /*
+     * Spanning for any brick = S
+     * Grid's row-gap = G
+     * Size of grid's implicitly create row-track = R
+     * Height of item content = H
+     * Net height of the item = H1 = H + G
+     * Net height of the implicit row-track = T = G + R
+     * S = H1 / T
+     */
+    var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+
+    /* Set the spanning as calculated above (S) */
+    item.style.gridRowEnd = 'span '+rowSpan;
+    if(gridImagesAsContent) {
+      item.querySelector('img.masonry-content').style.height = item.getBoundingClientRect().height + "px";
+    }
+  }
+}
+
+/**
+ * Apply spanning to all the masonry items
+ *
+ * Loop through all the items and apply the spanning to them using 
+ * `resizeMasonryItem()` function.
+ *
+ * @uses resizeMasonryItem
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function resizeAllMasonryItems(){
+  // Get all item class objects in one list
+  var allItems = document.querySelectorAll('.masonry-item');
+
+  /*
+   * Loop through the above list and execute the spanning function to
+   * each list-item (i.e. each masonry item)
+   */
+  if( allItems ) {
+    for(var i=0;i>allItems.length;i++){
+      resizeMasonryItem(allItems[i]);
+    }
+  }
+}
+
+/**
+ * Resize the items when all the images inside the masonry grid 
+ * finish loading. This will ensure that all the content inside our
+ * masonry items is visible.
+ *
+ * @uses ImagesLoaded
+ * @uses resizeMasonryItem
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function waitForImages() {
+  //var grid = document.getElementById("masonry");
+  var allItems = document.querySelectorAll('.masonry-item');
+  if( allItems ) {
+    for(var i=0;i<allItems.length;i++){
+      imagesLoaded( allItems[i], function(instance) {
+        var item = instance.elements[0];
+        resizeMasonryItem(item);
+        console.log("Waiting for Images");
+      } );
+    }
+  }
+}
+
+/* Resize all the grid items on the load and resize events */
+var masonryEvents = ['load', 'resize'];
+masonryEvents.forEach( function(event) {
+  window.addEventListener(event, resizeAllMasonryItems);
+} );
+
+/* Do a resize once more when all the images finish loading */
+waitForImages();  
+</script>
+</body>
+</html>

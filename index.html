@@ -1,0 +1,199 @@
+---
+layout: default
+---
+
+  <div class="masonry-wrapper"><div class="masonry">
+
+{% for post in paginator.posts %}
+<div class="masonry-item">
+    <div class="masonry-content">
+{% if post.type == "image" %}
+      <a href="#{{ post.idno }}1">
+        {% if post.image1type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image1 }}">
+        {% endif %}
+        {% if post.image1type == "out" %}
+        <img src="{{ post.image1 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}1">
+        {% if post.image1type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image1 }}">
+        {% endif %}
+        {% if post.image1type == "out" %}
+        <img src="{{ post.image1 }}">
+        {% endif %}
+      </a>
+      {% if post.image2 %}
+      <a href="#{{ post.idno }}2">
+        {% if post.image2type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image2 }}">
+        {% endif %}
+        {% if post.image2type == "out" %}
+        <img src="{{ post.image2 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}2">
+        {% if post.image2type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image2 }}">
+        {% endif %}
+        {% if post.image2type == "out" %}
+        <img src="{{ post.image2 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image3 %}
+      <a href="#{{ post.idno }}3">
+        {% if post.image3type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image3 }}">
+        {% endif %}
+        {% if post.image3type == "out" %}
+        <img src="{{ post.image3 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}3">
+        {% if post.image3type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image3 }}">
+        {% endif %}
+        {% if post.image3type == "out" %}
+        <img src="{{ post.image3 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image4 %}
+      <a href="#{{ post.idno }}4">
+        {% if post.image4type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image4 }}">
+        {% endif %}
+        {% if post.image4type == "out" %}
+        <img src="{{ post.image4 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}4">
+        {% if post.image4type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image4 }}">
+        {% endif %}
+        {% if post.image4type == "out" %}
+        <img src="{{ post.image4 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image5 %}
+      <a href="#{{ post.idno }}5">
+        {% if post.image5type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image5 }}">
+        {% endif %}
+        {% if post.image5type == "out" %}
+        <img src="{{ post.image5 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}5">
+        {% if post.image5type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image5 }}">
+        {% endif %}
+        {% if post.image5type == "out" %}
+        <img src="{{ post.image5 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image6 %}
+      <a href="#{{ post.idno }}6">
+        {% if post.image6type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image6 }}">
+        {% endif %}
+        {% if post.image6type == "out" %}
+        <img src="{{ post.image6 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}6">
+        {% if post.image6type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image6 }}">
+        {% endif %}
+        {% if post.image6type == "out" %}
+        <img src="{{ post.image6 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image7 %}
+      <a href="#{{ post.idno }}7">
+        {% if post.image7type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image7 }}">
+        {% endif %}
+        {% if post.image7type == "out" %}
+        <img src="{{ post.image7 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}7">
+        {% if post.image7type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image7 }}">
+        {% endif %}
+        {% if post.image7type == "out" %}
+        <img src="{{ post.image7 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image8 %}
+      <a href="#{{ post.idno }}8">
+        {% if post.image8type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image8 }}">
+        {% endif %}
+        {% if post.image8type == "out" %}
+        <img src="{{ post.image8 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}8">
+        {% if post.image8type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image8 }}">
+        {% endif %}
+        {% if post.image8type == "out" %}
+        <img src="{{ post.image8 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image9 %}
+      <a href="#{{ post.idno }}9">
+        {% if post.image9type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image9 }}">
+        {% endif %}
+        {% if post.image9type == "out" %}
+        <img src="{{ post.image9 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}9">
+        {% if post.image9type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image9 }}">
+        {% endif %}
+        {% if post.image9type == "out" %}
+        <img src="{{ post.image9 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% if post.image10 %}
+      <a href="#{{ post.idno }}10">
+        {% if post.image10type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image10 }}">
+        {% endif %}
+        {% if post.image10type == "out" %}
+        <img src="{{ post.image10 }}">
+        {% endif %}
+      </a>
+      <a href="#_" class="lightbox" id="{{ post.idno }}10">
+        {% if post.image10type == "in" %}
+        <img src="{{ site.baseurl }}/media/{{ post.image10 }}">
+        {% endif %}
+        {% if post.image10type == "out" %}
+        <img src="{{ post.image10 }}">
+        {% endif %}
+      </a>
+      {% endif %}
+{% endif %}
+{% if post.type == "text" %}
+<div>{{ post.content }}
+<p class="source">—{{ post.source }}</p>
+</div>
+{% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+</div> </div>

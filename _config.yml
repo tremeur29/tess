@@ -1,0 +1,5 @@
+future: true
+plugins:
+- jekyll-paginate
+paginate: 50
+baseurl: /tess
